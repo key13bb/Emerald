@@ -1,15 +1,18 @@
 [versions]
-agp = "8.4.1"
+agp = "8.4.2"
 firebaseBom = "33.1.0"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.1.5"
 espressoCore = "3.5.1"
-lifecycleRuntimeKtx = "2.8.1"
+lifecycleRuntimeKtx = "2.8.2"
 activityCompose = "1.9.0"
-composeBom = "2024.05.00"
+composeBom = "2024.06.00"
 material3 = "1.2.1"
+androidx = "1.7.0-beta02"
+material3WindowSizeClass = "1.3.0-beta03"
+uiAndroid = "1.6.8"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version = "1.14.0-alpha01" }
@@ -21,13 +24,14 @@ androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-co
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
-androidx-ui = { group = "androidx.compose.ui", name = "ui", version = "1.7.0-beta02" }
-androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics", version = "1.7.0-beta02" }
-androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version = "1.7.0-beta02" }
-androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview", version = "1.7.0-beta02" }
-androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest", version = "1.7.0-beta02" }
-androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4", version = "1.7.0-beta02" }
-androidx-material3 = { group = "androidx.compose.material3", name = "material3", version = "1.3.0-beta02" }
+androidx-ui = { group = "androidx.compose.ui", name = "ui", version = "uiAndroid" }
+androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics", version = "uiAndroid" }
+androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version = "uiAndroid" }
+androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview", version = "uiAndroid" }
+androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest", version = "1.7.0-beta03" }
+androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4", version = "uiAndroid" }
+androidx-material3 = { group = "androidx.compose.material3", name = "material3", version = "1.3.0-beta03" }
+androidx-ui-android = { group = "androidx.compose.ui", name = "ui-android", version.ref = "uiAndroid" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

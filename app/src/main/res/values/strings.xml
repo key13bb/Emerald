@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">Emerald</string>
+    <string name="app_name">Transport</string>
+    <string name="navbar_explore">Transportations</string>
+    <string name="navbar_map">Maps</string>
+    <string name="navbar_download">Downloads</string>
+    <string name="navbar_card">Cards</string>
+    <string name="navbar_settings">Settings</string>
+    <string name="under_development">Under development</string>
 </resources>
