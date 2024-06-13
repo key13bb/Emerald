@@ -3,11 +3,14 @@ package star.kiko13bb.emerald
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.displayCutout
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -21,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import star.kiko13bb.emerald.composable.MainBottomNavBar
 import star.kiko13bb.emerald.composable.MainRailNavBar
@@ -30,10 +34,12 @@ class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContent {
-            EmeraldTheme {}
-            val windowSizeClass = calculateWindowSizeClass(this)
-            EmeraldApp(windowSizeClass)
+            EmeraldTheme {
+                val windowSizeClass = calculateWindowSizeClass(this@MainActivity)
+                EmeraldApp(windowSizeClass)
+            }
         }
     }
 }
@@ -41,9 +47,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainScreen (modifier: Modifier = Modifier) {
     EmeraldTheme {
-        Box(
-            contentAlignment = Alignment.Center,
-            modifier = Modifier.fillMaxSize()
+        Box(modifier = Modifier.padding(20.dp).fillMaxSize(),
+            contentAlignment = Alignment.Center
         ) {
             Text(
                 modifier = modifier,
@@ -71,8 +76,8 @@ fun MainPortrait () {
 @Composable
 fun MainLandscape() {
     EmeraldTheme {
-        Surface(color = MaterialTheme.colorScheme.background) {
-            Row {
+        Surface {
+            Row(modifier = Modifier.padding(WindowInsets.displayCutout.asPaddingValues()).fillMaxSize()) {
                 MainRailNavBar()
                 MainScreen()
             }
@@ -82,12 +87,15 @@ fun MainLandscape() {
 
 @Composable
 fun EmeraldApp(windowSize: WindowSizeClass) {
-    when (windowSize.widthSizeClass) {
-        WindowWidthSizeClass.Compact -> {
-            MainPortrait()
-        }
-        WindowWidthSizeClass.Expanded -> {
-            MainLandscape()
+    EmeraldTheme {
+        when (windowSize.widthSizeClass) {
+            WindowWidthSizeClass.Compact -> {
+                MainPortrait()
+            }
+
+            WindowWidthSizeClass.Expanded -> {
+                MainLandscape()
+            }
         }
     }
 }
