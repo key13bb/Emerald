@@ -3,7 +3,7 @@
 
     <style name="Theme.Emerald" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_launcher_anim</item>
-        <item name="android:windowSplashScreenBackground">@android:color/system_accent1_800</item>
+        <item name="android:windowSplashScreenBackground">@android:color/system_accent1_900</item>
         <item name="android:windowSplashScreenIconBackgroundColor">@android:color/white</item>
     </style>
 </resources>
