@@ -44,11 +44,10 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import star.kiko13bb.emerald.settings.SettingsScreen
-import star.kiko13bb.emerald.ui.CardsScreen
-import star.kiko13bb.emerald.ui.DownloadsScreen
-import star.kiko13bb.emerald.ui.MapsScreen
-import star.kiko13bb.emerald.ui.TransportScreen
+import star.kiko13bb.emerald.ui.screens.DownloadsChooser
+import star.kiko13bb.emerald.ui.screens.MapsChooser
+import star.kiko13bb.emerald.ui.screens.SettingsChooser
+import star.kiko13bb.emerald.ui.screens.TransportChooser
 import star.kiko13bb.emerald.ui.theme.EmeraldTheme
 
 // Make them public to be used in other files
@@ -79,22 +78,19 @@ class MainActivity : ComponentActivity() {
                     R.string.navbar_transport,
                     R.string.navbar_map,
                     R.string.navbar_download,
-                    R.string.navbar_card,
                     R.string.navbar_settings
                 )
-                val ids = listOf("transport", "maps", "download", "cards", "settings")
+                val ids = listOf("transport", "maps", "download", "settings")
                 val outlineIcons = listOf(
-                    R.drawable.navbar_outline_explore,
+                    R.drawable.navbar_outline_transport,
                     R.drawable.navbar_outline_map,
                     R.drawable.navbar_outline_download,
-                    R.drawable.navbar_outline_card,
                     R.drawable.navbar_outline_settings
                 )
                 val filledIcons = listOf(
-                    R.drawable.navbar_filled_explore,
+                    R.drawable.navbar_filled_transport,
                     R.drawable.navbar_filled_map,
                     R.drawable.navbar_filled_download,
-                    R.drawable.navbar_filled_card,
                     R.drawable.navbar_filled_settings
                 )
 
@@ -158,11 +154,10 @@ class MainActivity : ComponentActivity() {
                                             navController = navController,
                                             startDestination = "transport"
                                         ) {
-                                            composable("transport") { TransportScreen() }
-                                            composable("maps") { MapsScreen() }
-                                            composable("download") { DownloadsScreen() }
-                                            composable("cards") { CardsScreen() }
-                                            composable("settings") { SettingsScreen() }
+                                            composable("transport") { TransportChooser() }
+                                            composable("maps") { MapsChooser() }
+                                            composable("download") { DownloadsChooser() }
+                                            composable("settings") { SettingsChooser() }
                                         }
                                     }
                                 }
@@ -214,11 +209,10 @@ class MainActivity : ComponentActivity() {
                                             navController = navController,
                                             startDestination = "transport",
                                         ) {
-                                            composable("transport") { TransportScreen() }
-                                            composable("maps") { MapsScreen() }
-                                            composable("download") { DownloadsScreen() }
-                                            composable("cards") { CardsScreen() }
-                                            composable("settings") { SettingsScreen() }
+                                            composable("transport") { TransportChooser() }
+                                            composable("maps") { MapsChooser() }
+                                            composable("download") { DownloadsChooser() }
+                                            composable("settings") { SettingsChooser() }
                                         }
                                     }
                                 }
