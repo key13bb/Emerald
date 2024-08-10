@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+option java_package = "star.kiko13bb.emerald";
+option java_multiple_files = true;
+
+message UserSettings {
+    bool options = 1;
+}

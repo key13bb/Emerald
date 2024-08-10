@@ -13,7 +13,9 @@ captures/
 .externalNativeBuild/
 .cxx/
 *.apk
+*.idsig
 output.json
+output-metadata.json
 
 # IntelliJ
 *.iml
@@ -25,9 +27,13 @@ render.experimental.xml
 # Keystore files
 *.jks
 *.keystore
+lineage
 
 # Google Services (e.g. APIs or Firebase)
 google-services.json
 
 # Android Profiling
 *.hprof
+/app/release/baselineProfiles/0/app-release.dm
+/app/release/baselineProfiles/1/app-release.dm
+/app/release/output-metadata.json
