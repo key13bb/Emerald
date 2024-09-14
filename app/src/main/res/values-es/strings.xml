@@ -28,4 +28,7 @@
     <string name="transport_bus">Autobús</string>
     <string name="transport_gondola">Góndola</string>
     <string name="transport_trolleybus">Trollebús</string>
+    <string name="settings_title_metered">Redes medidas</string>
+    <string name="settings_subtitle_metered">Permitir descargas en redes medidas</string>
+    <string name="settings_alert_info_metered">Activa esta opción para permitir descargar datos en redes medidas</string>
 </resources>
