@@ -3,5 +3,13 @@ option java_package = "star.kiko13bb.emerald";
 option java_multiple_files = true;
 
 message UserSettings {
-    bool options = 1;
+    bool firebase_analytics = 1;
+    bool firebase_crashlytics = 2;
+    bool on_metered = 3;
+
+    message GTFSFiles {
+        string title = 0;
+        string path = 1;
+    }
+    repeated GTFSFiles gtfs_files = 0;
 }
