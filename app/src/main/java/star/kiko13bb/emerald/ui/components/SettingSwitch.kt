@@ -26,6 +26,8 @@ import star.kiko13bb.emerald.UserSettings
 import star.kiko13bb.emerald.context
 import star.kiko13bb.emerald.proto.userPreferencesDataStore
 
+val EXCEPTION_KEY = Exception("Invalid key. Take a look at scheme.proto")
+
 @Composable
 fun SettingSwitch(
     title: String,
@@ -43,7 +45,7 @@ fun SettingSwitch(
                 2 -> userPreferences.firebaseAnalytics
                 3 -> userPreferences.firebaseCrashlytics
                 4 -> userPreferences.onMetered
-                else -> throw Exception("Invalid key. Take a look at scheme.proto")
+                else -> throw Exception(EXCEPTION_KEY)
             }
         }
     }
@@ -81,7 +83,7 @@ fun settingChooser(key: Int): Boolean {
         2 -> UserSettings.getDefaultInstance().firebaseAnalytics
         3 -> UserSettings.getDefaultInstance().firebaseCrashlytics
         4 -> UserSettings.getDefaultInstance().onMetered
-        else -> throw(Exception("Invalid key. Take a look at scheme.proto"))
+        else -> throw(Exception(EXCEPTION_KEY))
     }
     return setting
 }
@@ -91,7 +93,7 @@ suspend fun settingWriter(key: Int, value: Boolean): Boolean {
         2 -> context!!.userPreferencesDataStore.updateData { preferences -> preferences.toBuilder().setFirebaseAnalytics(value).build() }
         3 -> context!!.userPreferencesDataStore.updateData { preferences -> preferences.toBuilder().setFirebaseCrashlytics(value).build() }
         4 -> context!!.userPreferencesDataStore.updateData { preferences -> preferences.toBuilder().setOnMetered(value).build() }
-        else -> throw(Exception("Invalid key. Take a look at scheme.proto"))
+        else -> throw(Exception(EXCEPTION_KEY))
     }
     return !value
 }
