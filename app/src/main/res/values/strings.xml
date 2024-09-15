@@ -9,10 +9,8 @@
     <string name="settings_subtitle_firebase">Enable data collection</string>
     <string name="settings_alert_firebase_analytics">Analytics</string>
     <string name="settings_alert_firebase_crashlytics">Crashlytics</string>
-    <string name="settings_alert_firebase_performance">Performance</string>
     <string name="settings_alert_info_firebase_analytics">User info and app usage, such as your location by ip and what are you doing in the app</string>
     <string name="settings_alert_info_firebase_crashlytics">Information about when the app crashes unexpectedly, why it crashes, your app build and device details</string>
-    <string name="settings_alert_info_firebase_performance">Don\'t know exactly what do I receive from this</string>
     <string name="developing_crash">Make it crash!</string>
     <string name="settings_title_agency">Agencies</string>
     <string name="settings_subtitle_agency">Choose what agency you want to see</string>
