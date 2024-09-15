@@ -25,8 +25,6 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.datastore.core.DataStore
-import androidx.datastore.dataStore
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.ktx.Firebase
@@ -34,7 +32,6 @@ import star.kiko13bb.emerald.R
 import star.kiko13bb.emerald.UserSettings
 import star.kiko13bb.emerald.context
 import star.kiko13bb.emerald.gtfs.GTFSManager
-import star.kiko13bb.emerald.proto.SettingsSerializer
 
 val manager = context!!.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 var isMetered = manager.isActiveNetworkMetered
