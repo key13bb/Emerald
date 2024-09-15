@@ -55,6 +55,7 @@ android {
             useSupportLibrary = true
         }
         signingConfig = signingConfigs.getByName("debug")
+        versionNameSuffix = "-alpha"
     }
 
     buildTypes {
