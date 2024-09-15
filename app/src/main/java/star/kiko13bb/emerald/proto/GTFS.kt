@@ -5,29 +5,31 @@ import androidx.datastore.core.CorruptionException
 import androidx.datastore.core.DataStore
 import androidx.datastore.core.Serializer
 import androidx.datastore.dataStore
-import androidx.datastore.preferences.core.stringPreferencesKey
 import com.google.protobuf.InvalidProtocolBufferException
 import star.kiko13bb.emerald.UserSettings
 import java.io.InputStream
 import java.io.OutputStream
 
-object SettingsSerializer : Serializer<UserSettings> {
-    override val defaultValue: UserSettings = UserSettings.getDefaultInstance()
+object GTFSFilesSerializer : Serializer<UserSettings.GTFSFiles> {
+    override val defaultValue: UserSettings.GTFSFiles = UserSettings.GTFSFiles.getDefaultInstance()
 
-    override suspend fun readFrom(input: InputStream): UserSettings {
+    override suspend fun readFrom(input: InputStream): UserSettings.GTFSFiles {
         try {
-            return UserSettings.parseFrom(input)
+            return UserSettings.GTFSFiles.parseFrom(input)
         } catch (exception: InvalidProtocolBufferException) {
             throw CorruptionException("Cannot read proto.", exception)
         }
     }
 
     override suspend fun writeTo(
-        t: UserSettings,
-        output: OutputStream) = t.writeTo(output)
+        t: UserSettings.GTFSFiles,
+        output: OutputStream
+    ) {
+        t.writeTo(output)
+    }
 }
 
-val Context.settingsDataStore: DataStore<UserSettings> by dataStore(
-    fileName = "usersettings.pb",
-    serializer = SettingsSerializer
+val Context.GTFSFilesDataStore: DataStore<UserSettings.GTFSFiles> by dataStore(
+    fileName = "gtfsfiles.pb",
+    serializer = GTFSFilesSerializer
 )
