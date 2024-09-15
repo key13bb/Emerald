@@ -8,10 +8,8 @@ import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
@@ -61,26 +59,28 @@ val names = listOf(
 
 @Composable
 fun ChipSlider() {
+
     Row(
         modifier = Modifier.horizontalScroll(rememberScrollState()),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
+
         names.forEachIndexed { index, it ->
-            var selected by rememberSaveable { mutableStateOf(false) }
+            val (selected, onOptionSelected) = remember { mutableIntStateOf(0) }
             FilterChip(
-                selected = selected,
-                onClick = { selected = !selected },
-                leadingIcon = if (!selected) {
+                selected = (it == selected),
+                onClick = { onOptionSelected(it) },
+                leadingIcon = if (it == selected) {
                     {
                         Icon(
-                            imageVector = ImageVector.vectorResource(outlineIcons[index]),
+                            imageVector = ImageVector.vectorResource(filledIcons[index]),
                             contentDescription = null
                         )
                     }
                 } else {
                     {
                         Icon(
-                            imageVector = ImageVector.vectorResource(filledIcons[index]),
+                            imageVector = ImageVector.vectorResource(outlineIcons[index]),
                             contentDescription = null
                         )
                     }

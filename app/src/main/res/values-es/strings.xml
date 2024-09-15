@@ -9,11 +9,9 @@
     <string name="settings_title_firebase">Firebase</string>
     <string name="settings_subtitle_firebase">Habilitar recolección de datos</string>
     <string name="settings_alert_firebase_analytics">Analíticas</string>
-    <string name="settings_alert_firebase_crashlytics">Cierres inesperados</string>
-    <string name="settings_alert_firebase_performance">Rendimiento</string>
+    <string name="settings_alert_firebase_crashlytics">Fallos</string>
     <string name="settings_alert_info_firebase_analytics">Información del usuario como la ubicación por ip y lo que haces con la aplicación</string>
     <string name="settings_alert_info_firebase_crashlytics">Información sobre cuándo falla la aplicación de forma inesperada, porqué falla, la versión que estás usando y los detalles de tu dispositivo</string>
-    <string name="settings_alert_info_firebase_performance">No sé qué recibo exactamente de esto</string>
     <string name="developing_crash">¡Rómpelo!</string>
     <string name="settings_title_agency">Agencias</string>
     <string name="settings_subtitle_agency">Elige qué agencia quieres ver</string>
@@ -21,11 +19,14 @@
     <string name="transport_ferry">Ferry</string>
     <string name="transport_cable">Cable</string>
     <string name="transport_funicular">Funicular</string>
-    <string name="transport_monorail">Monorail</string>
+    <string name="transport_monorail">Monorraíl</string>
     <string name="transport_tram">Tranvía</string>
     <string name="transport_subway">Metro</string>
     <string name="transport_train">Tren</string>
     <string name="transport_bus">Autobús</string>
     <string name="transport_gondola">Góndola</string>
     <string name="transport_trolleybus">Trollebús</string>
+    <string name="settings_title_metered">Redes medidas</string>
+    <string name="settings_subtitle_metered">Permitir descargas en redes medidas</string>
+    <string name="settings_alert_info_metered">Activa esta opción para permitir descargar datos en redes medidas</string>
 </resources>

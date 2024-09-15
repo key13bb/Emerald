@@ -1,13 +1,11 @@
 package star.kiko13bb.emerald
 
 import android.annotation.SuppressLint
-import android.content.SharedPreferences
-import android.os.Build
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -41,9 +39,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import star.kiko13bb.emerald.scripts.updater
 import star.kiko13bb.emerald.ui.screens.DownloadsChooser
 import star.kiko13bb.emerald.ui.screens.MapsChooser
 import star.kiko13bb.emerald.ui.screens.SettingsChooser
@@ -51,25 +53,24 @@ import star.kiko13bb.emerald.ui.screens.TransportChooser
 import star.kiko13bb.emerald.ui.theme.EmeraldTheme
 
 // Make them public to be used in other files
-var sharedPreferences: SharedPreferences? = null
-var editor: SharedPreferences.Editor? = null
 var windowSizeClass: WindowSizeClass? = null
+var context: Context? = null
 
 // Main activity class
 class MainActivity : ComponentActivity() {
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-    @RequiresApi(Build.VERSION_CODES.Q)
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        context = this@MainActivity
+        lifecycleScope.launch {
+            async {
+                updater()
+            }
+        }
         setContent {
             EmeraldTheme {
-
-                // Define shared preferences
-                sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE)
-                editor = sharedPreferences?.edit()
-
                 // Variable which decides how to draw the screen
                 windowSizeClass = calculateWindowSizeClass(this@MainActivity)
 

@@ -3,27 +3,20 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.dependency.sorter)
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
-    id("com.google.firebase.firebase-perf")
     id("com.google.protobuf") version "0.9.4"
 }
 
 protobuf {
     protoc {
-        artifact = "com.google.protobuf:protoc:4.28.0-RC2"
+        artifact = "com.google.protobuf:protoc:3.16.1"
     }
     generateProtoTasks {
         all().forEach {
             it.builtins {
-                create("java") {
-                    option("lite")
-                }
-            }
-            it.builtins {
-                create("kotlin") {
-                    option("lite")
-                }
+                create("java")
             }
         }
     }
@@ -36,7 +29,7 @@ android {
             enableV2Signing = true
             enableV3Signing = true
             enableV4Signing = true
-            storeFile = file("F:\\Documents\\Authentication\\Certificates\\emerald.jks")
+            storeFile = file("/media/kiko13bb/Kiko13bb/Documents/Authentication/Certificates/emerald.jks")
             storePassword = "547123"
             keyAlias = "emerald"
             keyPassword = "547123"
@@ -52,16 +45,17 @@ android {
 
     defaultConfig {
         applicationId = "star.kiko13bb.emerald"
-        minSdk = 21
+        minSdk = 29
         targetSdk = 35
-        versionCode = 5
-        versionName = "0.0.5"
+        versionCode = 6
+        versionName = "0.0.6"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
         signingConfig = signingConfigs.getByName("debug")
+        versionNameSuffix = "-alpha"
     }
 
     buildTypes {
@@ -96,33 +90,42 @@ android {
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "/META-INF/DEPENDENCIES"
         }
     }
     buildToolsVersion = "35.0.0"
 }
 
 dependencies {
-    implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.crashlytics)
-    implementation(libs.firebase.analytics)
-    implementation(libs.firebase.perf)
-    implementation(libs.protobuf.kotlin.lite)
-    implementation(libs.protobuf.javalite)
-    implementation(libs.androidx.datastore.core)
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
+    implementation(platform(libs.firebase.bom))
+    //noinspection UseTomlInstead
+    implementation("androidx.compose.material3:material3-window-size-class:1.3.0")
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.datastore.core)
+    implementation(libs.androidx.datastore.preferences)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.savedstate)
+    implementation(libs.androidx.material3)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.preference.ktx)
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
     implementation(libs.datastore.preferences.core)
-    //noinspection UseTomlInstead
-    implementation("androidx.compose.material3:material3-window-size-class:1.3.0-beta05")
-    implementation(libs.androidx.navigation.compose)
-    implementation(libs.androidx.preference.ktx)
-    implementation(libs.androidx.datastore.preferences)
-    debugImplementation(libs.androidx.ui.tooling)
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.gtfs.realtime.bindings)
+    implementation(libs.gtfs.validator.model)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.onebusaway.gtfs)
+    implementation(libs.protobuf.kotlin)
+
     debugImplementation(libs.androidx.ui.test.manifest)
+    debugImplementation(libs.androidx.ui.tooling)
 }

@@ -1,8 +1,17 @@
 syntax = "proto3";
-
 option java_package = "star.kiko13bb.emerald";
 option java_multiple_files = true;
 
+// IDs must be > 0
+
 message UserSettings {
-    bool options = 1;
+    message GTFSFiles {
+        string title = 1;
+        string path = 2;
+    }
+    repeated GTFSFiles gtfs_files = 1;
+
+    bool firebase_analytics = 2;
+    bool firebase_crashlytics = 3;
+    bool on_metered = 4;
 }
