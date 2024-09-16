@@ -1,11 +1,12 @@
 package star.kiko13bb.emerald.ui.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Card
+import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Shapes
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
@@ -18,6 +19,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -25,6 +27,7 @@ import kotlinx.coroutines.launch
 import star.kiko13bb.emerald.UserSettings
 import star.kiko13bb.emerald.context
 import star.kiko13bb.emerald.proto.userPreferencesDataStore
+import star.kiko13bb.emerald.R
 
 val EXCEPTION_KEY = Exception("Invalid key. Take a look at scheme.proto")
 
@@ -62,7 +65,12 @@ fun SettingSwitch(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Card(shape = Shapes().extraLarge, onClick = { click() }) {
+        OutlinedCard(
+            shape = Shapes().extraLarge, onClick = { click() }, border = BorderStroke(
+                2.dp,
+                colorResource(R.color.settings_switch_background)
+            )
+        ) {
             Row(
                 modifier = Modifier
                     .padding(start = 20.dp, end = 20.dp, top = 10.dp, bottom = 10.dp)
@@ -70,8 +78,8 @@ fun SettingSwitch(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-            Text(text = title, fontSize = 20.sp)
-            Switch(checked = checked, onCheckedChange = { click() })
+                Text(text = title, fontSize = 20.sp)
+                Switch(checked = checked, onCheckedChange = { click() })
             }
         }
         Text(text = info, fontSize = 16.sp)
@@ -101,5 +109,5 @@ suspend fun settingWriter(key: Int, value: Boolean): Boolean {
 @Preview
 @Composable
 fun SettingSwitchPreview() {
-    SettingSwitch("Firebase", "Info", 1) {}
+    SettingSwitch("Firebase", "Info", 2) {}
 }
