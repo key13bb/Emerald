@@ -17,12 +17,6 @@ import star.kiko13bb.emerald.ui.components.icons
 import star.kiko13bb.emerald.ui.components.subtitles
 import star.kiko13bb.emerald.ui.components.titles
 
-/*
-val settingsFlow: Flow<Boolean> = MainActivity().settingsDataStore.data.map { settings ->
-    settings.options
-}
-*/
-
 @Composable
 fun CompactSettingsScreen() {
     Column(horizontalAlignment = Alignment.CenterHorizontally,
