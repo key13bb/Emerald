@@ -15,9 +15,4 @@ class MyApplication : Application() {
             return instance!!.applicationContext
         }
     }
-
-    override fun onCreate() {
-        super.onCreate()
-        // Initialize other components if needed
-    }
 }

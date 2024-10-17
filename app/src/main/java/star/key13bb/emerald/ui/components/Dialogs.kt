@@ -80,12 +80,10 @@ fun FirebaseDialog() {
 fun AgencyDialog() {
     val manager = GTFSManager("https://api.ctan.es/v1/datos/UNIFICADO/gtfs.zip")
     val agencies = manager.getAgenciesList()
-    CommonDialog(manager.getIt(), R.drawable.settings_outline_agency) {
-        Column {
-            agencies.forEach {
-                Text(text = it)
-                HorizontalDivider()
-            }
+    CommonDialog("Agencias", R.drawable.settings_outline_agency) {
+        agencies.forEach {
+            Text(it)
+            HorizontalDivider()
         }
     }
 }

@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="ic_launcher_background">#32FFA0</color>
+    <color name="settings_card_background">#FEFBFF</color>"
+    <color name="settings_switch_background">#7A90C8</color>
 </resources>
