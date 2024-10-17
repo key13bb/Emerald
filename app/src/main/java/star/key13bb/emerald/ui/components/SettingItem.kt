@@ -95,6 +95,7 @@ fun SettingItemPreview() {
 fun AlertPreview() {
     BasicAlertDialog(onDismissRequest = {  }) {
         OutlinedCard(shape = Shapes().extraLarge, colors = cardColors(containerColor = colorResource(R.color.settings_card_background))) {
+
             Column(modifier = Modifier.padding(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally) {
                 TextButton(

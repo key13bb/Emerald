@@ -15,5 +15,4 @@ class MyApplication : Application() {
             return instance!!.applicationContext
         }
     }
-
 }
