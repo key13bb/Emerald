@@ -16,8 +16,4 @@ class MyApplication : Application() {
         }
     }
 
-    override fun onCreate() {
-        super.onCreate()
-        // Initialize other components if needed
-    }
 }
