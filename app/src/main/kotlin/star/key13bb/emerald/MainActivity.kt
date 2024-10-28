@@ -20,7 +20,6 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.*
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import star.key13bb.emerald.scripts.updater
 import star.key13bb.emerald.ui.screens.*
@@ -32,7 +31,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        lifecycleScope.launch { async { updater() } }
+        lifecycleScope.launch { launch { updater() } }
         setContent {
             EmeraldTheme {
                 val windowSizeClass = calculateWindowSizeClass(this@MainActivity)
