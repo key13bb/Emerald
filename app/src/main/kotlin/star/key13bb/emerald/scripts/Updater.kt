@@ -10,7 +10,7 @@ suspend fun updater() {
     withContext(Dispatchers.Default) {
         while (true) {
             isMetered = manager.isActiveNetworkMetered
-            delay(1000)
+            delay(500)
         }
     }
 }
