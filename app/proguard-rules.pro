@@ -9,3 +9,4 @@
 -dontwarn java.beans.BeanInfo
 -dontwarn java.beans.Introspector
 -dontwarn java.beans.PropertyDescriptor
+-dontwarn java.sql.JDBCType
