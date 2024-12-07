@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
@@ -54,7 +55,7 @@ fun MainScreen (modifier: Modifier = Modifier) {
         Box(modifier = Modifier.padding(20.dp).fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
-            Row(modifier = modifier) {
+            Column(modifier = modifier) {
                 Text(
                     modifier = modifier,
                     text = stringResource(R.string.under_development),
@@ -69,7 +70,7 @@ fun MainScreen (modifier: Modifier = Modifier) {
                             imageVector = Icons.Outlined.Warning,
                             contentDescription = null
                         )
-                        Text(text = "Make it crash!")
+                        Text(text = "  Make it crash!")
                     }
                 }
             }
@@ -109,7 +110,6 @@ fun EmeraldApp(windowSize: WindowSizeClass) {
             WindowWidthSizeClass.Compact -> {
                 MainPortrait()
             }
-
             WindowWidthSizeClass.Expanded -> {
                 MainLandscape()
             }

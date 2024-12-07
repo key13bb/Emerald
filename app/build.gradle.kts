@@ -32,7 +32,7 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -58,13 +58,12 @@ android {
         }
     }
     buildToolsVersion = "35.0.0 rc4"
-    ndkVersion = "27.0.11902837 rc2"
 }
 
 dependencies {
     implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.analytics)
     implementation(libs.firebase.crashlytics)
+    implementation(libs.google.firebase.analytics)
     implementation(libs.firebase.perf)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
