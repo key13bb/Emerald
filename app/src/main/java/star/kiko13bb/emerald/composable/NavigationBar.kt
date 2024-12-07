@@ -35,11 +35,8 @@ fun getIcon(flag: Boolean): List<Int> {
 }
 
 @Composable
-fun MainBottomNavBar(modifier: Modifier = Modifier) {
-    NavigationBar(
-        containerColor = MaterialTheme.colorScheme.surfaceVariant,
-        modifier = modifier
-    ) {
+fun MainBottomNavBar() {
+    NavigationBar {
         items.forEachIndexed { index, item ->
             NavigationBarItem(
                 icon = { Icon(imageVector = ImageVector.vectorResource(id = getIcon(selectedItem==index)[index]), contentDescription = null) },
@@ -53,10 +50,7 @@ fun MainBottomNavBar(modifier: Modifier = Modifier) {
 
 @Composable
 fun MainRailNavBar(modifier: Modifier = Modifier) {
-    NavigationRail(
-        containerColor = MaterialTheme.colorScheme.surfaceVariant,
-        modifier = modifier
-    ) {
+    NavigationRail {
         Column(
             modifier = modifier.fillMaxHeight(),
             verticalArrangement = Arrangement.Center,
