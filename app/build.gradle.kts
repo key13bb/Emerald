@@ -13,7 +13,6 @@ android {
     compileSdk = 34
 
     androidResources {
-        @Suppress("UnstableApiUsage")
         generateLocaleConfig = true
     }
 
@@ -21,13 +20,14 @@ android {
         applicationId = "star.kiko13bb.emerald"
         minSdk = 21
         targetSdk = 34
-        versionCode = 2
-        versionName = "0.0.2"
+        versionCode = 3
+        versionName = "0.0.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
+        signingConfig = signingConfigs.getByName("debug")
     }
 
     buildTypes {
@@ -37,6 +37,12 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("debug")
+        }
+        debug {
+            versionNameSuffix = "-debug"
+            isMinifyEnabled = false
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
     compileOptions {
@@ -63,7 +69,7 @@ android {
 dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.crashlytics)
-    implementation(libs.google.firebase.analytics)
+    implementation(libs.firebase.analytics)
     implementation(libs.firebase.perf)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -73,13 +79,19 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.datastore.preferences.core)
+    implementation(libs.androidx.datastore)
     //noinspection UseTomlInstead
-    implementation("androidx.compose.material3:material3-window-size-class")
+    implementation("androidx.compose.material3:material3-window-size-class:1.3.0-beta03")
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.preference.ktx)
+    implementation(libs.androidx.datastore.preferences)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+    androidTestImplementation(libs.junit.jupiter)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 }
