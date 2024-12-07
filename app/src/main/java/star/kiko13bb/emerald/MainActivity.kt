@@ -8,22 +8,25 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeContentPadding
+import androidx.compose.foundation.layout.safeDrawingPadding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.NavigationRailItem
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
@@ -36,23 +39,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import star.kiko13bb.emerald.settings.SettingsScreen
 import star.kiko13bb.emerald.ui.CardsScreen
 import star.kiko13bb.emerald.ui.DownloadsScreen
 import star.kiko13bb.emerald.ui.MapsScreen
-import star.kiko13bb.emerald.ui.SettingsScreen
 import star.kiko13bb.emerald.ui.TransportScreen
 import star.kiko13bb.emerald.ui.theme.EmeraldTheme
 
+// Make them public to be used in other files
 var sharedPreferences: SharedPreferences? = null
 var editor: SharedPreferences.Editor? = null
+var windowSizeClass: WindowSizeClass? = null
 
+// Main activity class
 class MainActivity : ComponentActivity() {
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     @RequiresApi(Build.VERSION_CODES.Q)
@@ -62,10 +66,22 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             EmeraldTheme {
+
+                // Define shared preferences
                 sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE)
                 editor = sharedPreferences?.edit()
-                val windowSizeClass = calculateWindowSizeClass(this@MainActivity)
-                val items = listOf(R.string.navbar_transport, R.string.navbar_map, R.string.navbar_download, R.string.navbar_card, R.string.navbar_settings)
+
+                // Variable which decides how to draw the screen
+                windowSizeClass = calculateWindowSizeClass(this@MainActivity)
+
+                // Navigation bar items information
+                val items = listOf(
+                    R.string.navbar_transport,
+                    R.string.navbar_map,
+                    R.string.navbar_download,
+                    R.string.navbar_card,
+                    R.string.navbar_settings
+                )
                 val ids = listOf("transport", "maps", "download", "cards", "settings")
                 val outlineIcons = listOf(
                     R.drawable.navbar_outline_explore,
@@ -82,6 +98,7 @@ class MainActivity : ComponentActivity() {
                     R.drawable.navbar_filled_settings
                 )
 
+                // Function to give a selected filled icon or an unselected outline icon
                 fun getIcon(flag: Boolean): List<Int> {
                     return if (flag) {
                         filledIcons
@@ -89,31 +106,58 @@ class MainActivity : ComponentActivity() {
                         outlineIcons
                     }
                 }
+
+                // Variables to control screen's content
                 val navController = rememberNavController()
                 var screen by rememberSaveable { mutableIntStateOf(0) }
 
-                EmeraldTheme {
-                    Surface {
-                        when (windowSizeClass.widthSizeClass) {
-                            WindowWidthSizeClass.Compact -> {
-                                Scaffold(bottomBar = {
-                                    NavigationBar {
-                                        items.forEachIndexed { index, item ->
-                                            NavigationBarItem(
-                                                icon = { Icon(imageVector = ImageVector.vectorResource
-                                                    (id = getIcon(screen ==index)[index]),
-                                                    contentDescription = null) },
-                                                label = { Text(text = stringResource(item)) },
-                                                selected = screen == index,
-                                                alwaysShowLabel = false,
-                                                onClick = { screen = index
-                                                    navController.navigate(ids[index]) }
-                                            )
-                                        }
+                // Main screen with navigation bar
+                Surface {
+                    when (windowSizeClass!!.widthSizeClass) {
+
+                        // When screen is straight
+                        WindowWidthSizeClass.Compact -> {
+                            Scaffold(bottomBar = {
+
+                                // Bottom navigation bar definition
+                                NavigationBar {
+                                    items.forEachIndexed { index, item ->
+
+                                        // Navigation bar items definition from list
+                                        NavigationBarItem(
+                                            icon = {
+                                                Icon(
+                                                    imageVector = ImageVector.vectorResource
+                                                        (id = getIcon(screen == index)[index]),
+                                                    contentDescription = null
+                                                )
+                                            },
+                                            label = { Text(text = stringResource(item)) },
+                                            selected = screen == index,
+                                            alwaysShowLabel = false,
+                                            onClick = {
+                                                screen = index
+                                                navController.popBackStack()
+                                                navController.navigate(ids[index])
+                                            }
+                                        )
                                     }
-                                }) {
-                                    Box(modifier = Modifier.safeContentPadding().fillMaxSize()) {
-                                        NavHost(navController = navController, startDestination = "transport") {
+                                }
+                            }
+                            ) {
+                                // Rest of screen, without drawing neither notch nor navigation bar
+
+                                Column(modifier = Modifier.padding(start = 15.dp, end = 15.dp, top = 10.dp, bottom = 10.dp).safeDrawingPadding()) {
+                                    Title(stringResource(items[screen]))
+                                    Box(
+                                        modifier = Modifier
+                                            .safeDrawingPadding()
+                                            .fillMaxSize()
+                                    ) {
+                                        NavHost(
+                                            navController = navController,
+                                            startDestination = "transport"
+                                        ) {
                                             composable("transport") { TransportScreen() }
                                             composable("maps") { MapsScreen() }
                                             composable("download") { DownloadsScreen() }
@@ -123,30 +167,53 @@ class MainActivity : ComponentActivity() {
                                     }
                                 }
                             }
-                            WindowWidthSizeClass.Expanded -> {
-                                Row(modifier = Modifier.safeContentPadding().fillMaxSize()) {
-                                    NavigationRail {
-                                        Column(
-                                            verticalArrangement = (Arrangement.spacedBy(10.dp)),
-                                            horizontalAlignment = Alignment.CenterHorizontally
-                                        ) {
-                                            items.forEachIndexed { index, item ->
-                                                NavigationRailItem(
-                                                    icon = { Icon(
-                                                        imageVector = ImageVector.vectorResource
-                                                            (id = getIcon(screen==index)[index]),
-                                                        contentDescription = null) },
-                                                    label = { Text(text = stringResource(item)) },
-                                                    selected = screen == index,
-                                                    alwaysShowLabel = false,
-                                                    onClick = { screen = index
-                                                        navController.navigate(ids[index]) }
+                        }
+
+                        // When screen is wide or in portrait mode
+                        WindowWidthSizeClass.Expanded -> {
+
+                            // Draw on all screen except on notch or bottom gesture bar
+                            Row(modifier = Modifier
+                                .safeContentPadding()
+                                .fillMaxSize()) {
+
+                                // Navigation rail definition
+                                NavigationRail(modifier = Modifier.align(Alignment.CenterVertically)) {
+
+                                    items.forEachIndexed { index, item ->
+
+                                        // Navigation rail items definition from list
+                                        NavigationRailItem(
+                                            icon = {
+                                                Icon(
+                                                    imageVector = ImageVector.vectorResource
+                                                        (id = getIcon(screen == index)[index]),
+                                                    contentDescription = null
                                                 )
+                                            },
+                                            label = { Text(text = stringResource(item)) },
+                                            selected = screen == index,
+                                            alwaysShowLabel = false,
+                                            onClick = {
+                                                screen = index
+                                                navController.popBackStack()
+                                                navController.navigate(ids[index])
                                             }
-                                        }
+                                        )
                                     }
-                                    Box(modifier = Modifier.safeContentPadding().fillMaxSize()) {
-                                        NavHost(navController = navController, startDestination = "transport") {
+                                }
+                                Column(modifier = Modifier.padding(start = 15.dp, end = 15.dp, top = 10.dp, bottom = 10.dp).safeDrawingPadding()) {
+                                    Title(stringResource(items[screen]))
+
+
+                                    // Rest of screen, without drawing neither notch nor bottom gesture bar
+                                    Box(
+                                        modifier = Modifier.fillMaxSize()
+                                    ) {
+                                        NavHost(
+                                            navController = navController,
+                                            startDestination = "transport",
+                                        ) {
                                             composable("transport") { TransportScreen() }
                                             composable("maps") { MapsScreen() }
                                             composable("download") { DownloadsScreen() }
@@ -165,33 +232,8 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun DefaultScreen(modifier: Modifier = Modifier) {
-    Box(modifier = modifier.fillMaxSize()) {
-        Column(modifier = modifier.align(Alignment.Center)) {
-            Text(
-                modifier = modifier,
-                text = stringResource(R.string.under_development),
-                textAlign = TextAlign.Center,
-                fontSize = 24.sp,
-            )
-            OutlinedButton(
-                modifier = modifier.align(Alignment.CenterHorizontally),
-                onClick = { throw RuntimeException("Test Crash") },
-            ) {
-                Row {
-                    Icon(
-                        imageVector = ImageVector.vectorResource(id = R.drawable.outline_warning),
-                        contentDescription = null
-                    )
-                    Text(text = "  Make it crash!")
-                }
-            }
-        }
-    }
-}
-
-@Preview
-@Composable
-fun DefaultScreenPreview() {
-    DefaultScreen()
+fun Title(title: String) {
+    Spacer(modifier = Modifier.size(60.dp))
+    Text(text = title, fontSize = 32.sp)
+    Spacer(modifier = Modifier.size(20.dp))
 }

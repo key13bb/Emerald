@@ -10,7 +10,7 @@ plugins {
 
 android {
     namespace = "star.kiko13bb.emerald"
-    compileSdk = 34
+    compileSdk = 35
 
     androidResources {
         generateLocaleConfig = true
@@ -19,9 +19,9 @@ android {
     defaultConfig {
         applicationId = "star.kiko13bb.emerald"
         minSdk = 21
-        targetSdk = 34
-        versionCode = 3
-        versionName = "0.0.3"
+        targetSdk = 35
+        versionCode = 4
+        versionName = "0.0.4"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -63,7 +63,7 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
-    buildToolsVersion = "35.0.0 rc4"
+    buildToolsVersion = "35.0.0"
 }
 
 dependencies {
