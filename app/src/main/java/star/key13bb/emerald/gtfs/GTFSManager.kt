@@ -21,10 +21,4 @@ class GTFSManager(source: String) {
     fun getAgenciesList(): List<String> {
         return reader.agencies.map { it.id }
     }
-
-    @Override
-    fun getIt(): String {
-        return title
-    }
-
 }
