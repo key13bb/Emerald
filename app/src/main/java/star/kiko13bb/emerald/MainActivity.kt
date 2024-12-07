@@ -40,18 +40,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.datastore.core.DataStore
-import androidx.datastore.dataStore
-import androidx.datastore.migrations.SharedPreferencesMigration
-import androidx.datastore.migrations.SharedPreferencesView
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.async
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
-import star.kiko13bb.emerald.proto.SettingsSerializer
 import star.kiko13bb.emerald.scripts.updater
 import star.kiko13bb.emerald.ui.screens.DownloadsChooser
 import star.kiko13bb.emerald.ui.screens.MapsChooser
@@ -60,8 +54,6 @@ import star.kiko13bb.emerald.ui.screens.TransportChooser
 import star.kiko13bb.emerald.ui.theme.EmeraldTheme
 
 // Make them public to be used in other files
-var sharedPreferences: SharedPreferences? = null
-var editor: SharedPreferences.Editor? = null
 var windowSizeClass: WindowSizeClass? = null
 var context: Context? = null
 
@@ -80,11 +72,6 @@ class MainActivity : ComponentActivity() {
         }
         setContent {
             EmeraldTheme {
-
-                // Define shared preferences
-                sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE)
-                editor = sharedPreferences?.edit()
-
                 // Variable which decides how to draw the screen
                 windowSizeClass = calculateWindowSizeClass(this@MainActivity)
 
