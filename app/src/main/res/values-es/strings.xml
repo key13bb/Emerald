@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Transporte</string>
+    <string name="navbar_explore">Transportes</string>
+    <string name="navbar_map">Mapas</string>
+    <string name="navbar_download">Descargas</string>
+    <string name="navbar_card">Tarjetas</string>
+    <string name="navbar_settings">Ajustes</string>
+    <string name="under_development">Bajo Desarrollo</string>
+</resources>

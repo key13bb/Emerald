@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -8,12 +10,17 @@ android {
     namespace = "star.kiko13bb.emerald"
     compileSdk = 34
 
+    androidResources {
+        @Suppress("UnstableApiUsage")
+        generateLocaleConfig = true
+    }
+
     defaultConfig {
         applicationId = "star.kiko13bb.emerald"
         minSdk = 21
         targetSdk = 34
         versionCode = 1
-        versionName = "1.0"
+        versionName = "0.0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -50,7 +57,6 @@ android {
     }
     buildToolsVersion = "35.0.0 rc4"
 }
-
 dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
@@ -62,7 +68,8 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation("androidx.compose.material3:material3-window-size-class:1.3.0-beta02")
+    //noinspection UseTomlInstead
+    implementation("androidx.compose.material3:material3-window-size-class")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
