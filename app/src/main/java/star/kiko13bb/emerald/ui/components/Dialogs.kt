@@ -81,10 +81,8 @@ fun AgencyDialog() {
     val agencies = manager.getAgenciesList()
     CommonDialog(manager.getIt(), R.drawable.settings_outline_agency) {
         Column {
-            agencies.forEach {
-                Text(text = it)
-                HorizontalDivider()
-            }
+            Text(text = agencies)
+            HorizontalDivider()
         }
     }
 }

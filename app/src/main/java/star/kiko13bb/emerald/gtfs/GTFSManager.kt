@@ -17,8 +17,8 @@ class GTFSManager(source: String) {
         title = reader.defaultAgencyId
     }
 
-    fun getAgenciesList(): List<String> {
-        return reader.agencies.map { it.id }
+    fun getAgenciesList(): String {
+        return reader.agencies[0].name
     }
 
     @Override
