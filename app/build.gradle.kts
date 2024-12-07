@@ -7,11 +7,12 @@ plugins {
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
     id("com.google.protobuf") version "0.9.4"
+    alias(libs.plugins.kotlin.compose)
 }
 
 protobuf {
     protoc {
-        artifact = "com.google.protobuf:protoc:4.29.0-RC1"
+        artifact = "com.google.protobuf:protoc:4.29.1"
     }
     generateProtoTasks {
         all().forEach {
@@ -33,7 +34,7 @@ android {
     }
 
     namespace = "star.key13bb.emerald"
-    compileSdk = 35
+    compileSdkPreview = "Baklava"
 
     androidResources {
         generateLocaleConfig = true
@@ -52,6 +53,7 @@ android {
         }
         signingConfig = signingConfigs.getByName("debug")
         versionNameSuffix = "-alpha"
+        multiDexEnabled = true
     }
 
     buildTypes {
@@ -66,22 +68,21 @@ android {
         }
         debug {
             versionNameSuffix = "-debug"
-            isMinifyEnabled = false
             signingConfig = signingConfigs.getByName("debug")
+            isJniDebuggable = true
+            multiDexEnabled = true
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-    kotlinOptions {
-        jvmTarget = "17"
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
     buildFeatures {
         compose = true
+        viewBinding = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+    kotlinOptions {
+        jvmTarget = "21"
     }
     packaging {
         resources {
@@ -89,7 +90,11 @@ android {
             excludes += "/META-INF/DEPENDENCIES"
         }
     }
-    buildToolsVersion = "35.0.0"
+    buildToolsVersion = "36.0.0 rc1"
+    dependenciesInfo {
+        includeInApk = true
+        includeInBundle = true
+    }
 }
 
 dependencies {
@@ -120,7 +125,7 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.onebusaway.gtfs)
     implementation(libs.protobuf.kotlin)
-    implementation(libs.xerial.sqlite.jdbc)
+    implementation(libs.androidx.sqlite.ktx)
 
     debugImplementation(libs.androidx.ui.test.manifest)
     debugImplementation(libs.androidx.ui.tooling)
