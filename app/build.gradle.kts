@@ -11,7 +11,7 @@ plugins {
 
 protobuf {
     protoc {
-        artifact = "com.google.protobuf:protoc:3.16.1"
+        artifact = "com.google.protobuf:protoc:4.29.0-RC1"
     }
     generateProtoTasks {
         all().forEach {
@@ -32,7 +32,7 @@ android {
         }
     }
 
-    namespace = "star.kiko13bb.emerald"
+    namespace = "star.key13bb.emerald"
     compileSdk = 35
 
     androidResources {
@@ -40,11 +40,11 @@ android {
     }
 
     defaultConfig {
-        applicationId = "star.kiko13bb.emerald"
+        applicationId = "star.key13bb.emerald"
         minSdk = 29
         targetSdk = 35
-        versionCode = 6
-        versionName = "0.0.6"
+        versionCode = 7
+        versionName = "0.0.7"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -96,7 +96,7 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(platform(libs.firebase.bom))
     //noinspection UseTomlInstead
-    implementation("androidx.compose.material3:material3-window-size-class:1.3.0")
+    implementation("androidx.compose.material3:material3-window-size-class:1.4.0-alpha02")
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.datastore.core)
