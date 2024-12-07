@@ -29,6 +29,7 @@ object GTFSFilesSerializer : Serializer<UserSettings.GTFSFiles> {
     }
 }
 
+@Suppress("unused")
 val Context.GTFSFilesDataStore: DataStore<UserSettings.GTFSFiles> by dataStore(
     fileName = "gtfsfiles.pb",
     serializer = GTFSFilesSerializer
