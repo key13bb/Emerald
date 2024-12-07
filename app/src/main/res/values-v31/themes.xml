@@ -2,5 +2,6 @@
 <resources>
 
     <style name="Theme.Emerald" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_launcher_anim</item>
     </style>
 </resources>
