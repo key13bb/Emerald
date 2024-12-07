@@ -29,10 +29,6 @@ android {
             enableV2Signing = true
             enableV3Signing = true
             enableV4Signing = true
-            storeFile = file("/media/kiko13bb/Kiko13bb/Documents/Authentication/Certificates/emerald.jks")
-            storePassword = "547123"
-            keyAlias = "emerald"
-            keyPassword = "547123"
         }
     }
 
