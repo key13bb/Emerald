@@ -12,10 +12,10 @@ androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version = "1.1
 
 androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "datastore-preferences-core-version" }
 datastore-preferences-core = { module = "androidx.datastore:datastore-preferences-core", version.ref = "datastore-preferences-core-version" }
-firebase-bom = { module = "com.google.firebase:firebase-bom", version = "33.1.0" }
-firebase-analytics = { module = "com.google.firebase:firebase-analytics", version = "22.0.1" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version = "33.1.1" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics", version = "22.0.2" }
 firebase-perf = { module = "com.google.firebase:firebase-perf", version = "21.0.1" }
-firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics", version = "19.0.1" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics", version = "19.0.2" }
 
 junit = { group = "junit", name = "junit", version = "4.13.2" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version = "1.2.0-rc01" }
