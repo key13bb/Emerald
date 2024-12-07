@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Transporte</string>
-    <string name="navbar_explore">Transportes</string>
+    <string name="navbar_transport">Transportes</string>
     <string name="navbar_map">Mapas</string>
     <string name="navbar_download">Descargas</string>
     <string name="navbar_card">Tarjetas</string>
     <string name="navbar_settings">Ajustes</string>
     <string name="under_development">Bajo Desarrollo</string>
+    <string name="settings_title_firebase">Firebase</string>
+    <string name="settings_subtitle_firebase">Habilitar recolección de datos</string>
+    <string name="settings_info_firebase">Esto capturará la información del dispositivo y de la aplicación y los enviará a Firebase, así puedo ver qué está pasando.</string>
 </resources>
