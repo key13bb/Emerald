@@ -27,4 +27,7 @@
     <string name="transport_funicular">Funicular</string>
     <string name="transport_trolleybus">Trolleybus</string>
     <string name="transport_monorail">Monorail</string>
+    <string name="settings_title_metered">Metered networks</string>
+    <string name="settings_subtitle_metered">Allow downloads on metered networks</string>
+    <string name="settings_alert_info_metered">Enable this option to allow downloading data on metered networks</string>
 </resources>

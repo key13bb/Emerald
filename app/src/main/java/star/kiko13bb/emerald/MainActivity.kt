@@ -1,13 +1,12 @@
 package star.kiko13bb.emerald
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.SharedPreferences
-import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -41,9 +40,19 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.datastore.core.DataStore
+import androidx.datastore.dataStore
+import androidx.datastore.migrations.SharedPreferencesMigration
+import androidx.datastore.migrations.SharedPreferencesView
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import kotlinx.coroutines.async
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
+import star.kiko13bb.emerald.proto.SettingsSerializer
+import star.kiko13bb.emerald.scripts.updater
 import star.kiko13bb.emerald.ui.screens.DownloadsChooser
 import star.kiko13bb.emerald.ui.screens.MapsChooser
 import star.kiko13bb.emerald.ui.screens.SettingsChooser
@@ -54,15 +63,21 @@ import star.kiko13bb.emerald.ui.theme.EmeraldTheme
 var sharedPreferences: SharedPreferences? = null
 var editor: SharedPreferences.Editor? = null
 var windowSizeClass: WindowSizeClass? = null
+var context: Context? = null
 
 // Main activity class
 class MainActivity : ComponentActivity() {
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-    @RequiresApi(Build.VERSION_CODES.Q)
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        context = this@MainActivity
+        lifecycleScope.launch {
+            async {
+                updater()
+            }
+        }
         setContent {
             EmeraldTheme {
 

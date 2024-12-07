@@ -1,5 +1,3 @@
-@file:Suppress("unused")
-
 package star.kiko13bb.emerald.proto
 
 import android.content.Context
@@ -7,6 +5,7 @@ import androidx.datastore.core.CorruptionException
 import androidx.datastore.core.DataStore
 import androidx.datastore.core.Serializer
 import androidx.datastore.dataStore
+import androidx.datastore.preferences.core.stringPreferencesKey
 import com.google.protobuf.InvalidProtocolBufferException
 import star.kiko13bb.emerald.UserSettings
 import java.io.InputStream
