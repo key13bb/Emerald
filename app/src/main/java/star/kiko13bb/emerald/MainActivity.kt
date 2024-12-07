@@ -11,6 +11,10 @@ import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.displayCutout
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Warning
+import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -50,12 +54,25 @@ fun MainScreen (modifier: Modifier = Modifier) {
         Box(modifier = Modifier.padding(20.dp).fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
-            Text(
-                modifier = modifier,
-                text = stringResource(R.string.under_development),
-                textAlign = TextAlign.Center,
-                fontSize = 24.sp,
-            )
+            Row(modifier = modifier) {
+                Text(
+                    modifier = modifier,
+                    text = stringResource(R.string.under_development),
+                    textAlign = TextAlign.Center,
+                    fontSize = 24.sp,
+                )
+                OutlinedButton(modifier = modifier,
+                    onClick = {throw RuntimeException("Test Crash")},
+                    ) {
+                    Row {
+                        Icon(
+                            imageVector = Icons.Outlined.Warning,
+                            contentDescription = null
+                        )
+                        Text(text = "Make it crash!")
+                    }
+                }
+            }
         }
     }
 }
