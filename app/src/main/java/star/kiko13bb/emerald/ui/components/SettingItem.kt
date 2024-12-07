@@ -52,7 +52,14 @@ fun SettingItem(
         }
         Spacer(modifier = Modifier.weight(1f))
         FilledIconButton(onClick = { dialog = true }) {
-            Icon(ImageVector.vectorResource(R.drawable.settings_outline_info), contentDescription = null)
+            if (title == stringResource(R.string.settings_title_agency)) {
+                Icon(ImageVector.vectorResource(R.drawable.outline_warning), contentDescription = null)
+            } else {
+                Icon(
+                    ImageVector.vectorResource(R.drawable.settings_outline_info),
+                    contentDescription = null
+                )
+            }
         }
     }
     if (dialog) {
