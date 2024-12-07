@@ -7,11 +7,11 @@ import java.io.File
 
 const val DEFAULT_NAME = "temp.zip"
 
-class GTFSManager(source: String, metered: Boolean) {
+class GTFSManager(source: String) {
     var title: String
     val reader = GtfsReader()
     init {
-        downloadFileToCache(context!!, source, DEFAULT_NAME, metered)
+        downloadFileToCache(context!!, source, DEFAULT_NAME)
         reader.setInputLocation(File(context!!.filesDir.path + "/" + DEFAULT_NAME))
         reader.run()
         title = reader.defaultAgencyId

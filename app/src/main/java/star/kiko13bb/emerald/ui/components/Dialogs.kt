@@ -25,13 +25,16 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.datastore.core.DataStore
+import androidx.datastore.dataStore
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.ktx.Firebase
 import star.kiko13bb.emerald.R
+import star.kiko13bb.emerald.UserSettings
 import star.kiko13bb.emerald.context
 import star.kiko13bb.emerald.gtfs.GTFSManager
-import star.kiko13bb.emerald.sharedPreferences
+import star.kiko13bb.emerald.proto.SettingsSerializer
 
 val manager = context!!.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 var isMetered = manager.isActiveNetworkMetered
@@ -62,21 +65,22 @@ fun CommonDialog(
 fun FirebaseDialog() {
     SettingSwitch(stringResource(R.string.settings_alert_firebase_analytics),
         stringResource(R.string.settings_alert_info_firebase_analytics),
-        "Analytics") {
-        val state = sharedPreferences?.getBoolean("Analytics", false)
-        Firebase.analytics.setAnalyticsCollectionEnabled(!state!!)
+        2) {
+        val state = UserSettings.getDefaultInstance().firebaseAnalytics
+        Firebase.analytics.setAnalyticsCollectionEnabled(!state)
     }
+    HorizontalDivider()
     SettingSwitch(stringResource(R.string.settings_alert_firebase_crashlytics),
         stringResource(R.string.settings_alert_info_firebase_crashlytics),
-        "Crashlytics") {
-        val state = sharedPreferences?.getBoolean("Crashlytics", false)
-        Firebase.crashlytics.isCrashlyticsCollectionEnabled = !state!!
+        3) {
+        val state = UserSettings.getDefaultInstance().firebaseCrashlytics
+        Firebase.crashlytics.isCrashlyticsCollectionEnabled = !state
     }
 }
 
 @Composable
 fun AgencyDialog() {
-    val manager = GTFSManager("https://api.ctan.es/v1/datos/UNIFICADO/gtfs.zip", isMetered)
+    val manager = GTFSManager("https://api.ctan.es/v1/datos/UNIFICADO/gtfs.zip")
     val agencies = manager.getAgenciesList()
     CommonDialog(manager.getIt(), R.drawable.settings_outline_agency) {
         Column {
@@ -92,9 +96,7 @@ fun AgencyDialog() {
 fun MeteredDialog() {
     SettingSwitch(stringResource(R.string.settings_title_metered),
         stringResource(R.string.settings_alert_info_metered),
-        "Metered") {
-        sharedPreferences!!.edit().putBoolean("Metered", false).apply()
-    }
+        4) {}
     var expanded by rememberSaveable { mutableStateOf(isMetered) }
     if (expanded) {
         HorizontalDivider()
