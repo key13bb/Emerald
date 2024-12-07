@@ -41,6 +41,7 @@ fun MainBottomNavBar() {
                 icon = { Icon(imageVector = ImageVector.vectorResource(id = getIcon(selectedItem==index)[index]), contentDescription = null) },
                 label = { Text(text = stringResource(item)) },
                 selected = selectedItem == index,
+                alwaysShowLabel = false,
                 onClick = { selectedItem = index }
             )
         }
@@ -60,6 +61,7 @@ fun MainRailNavBar(modifier: Modifier = Modifier) {
                     icon = { Icon(imageVector = ImageVector.vectorResource(id = getIcon(selectedItem==index)[index]), contentDescription = null) },
                     label = { Text(text = stringResource(item)) },
                     selected = selectedItem == index,
+                    alwaysShowLabel = false,
                     onClick = { selectedItem = index }
                 )
             }
