@@ -1,6 +1,5 @@
 package star.kiko13bb.emerald.ui.components
 
-import android.app.DownloadManager
 import androidx.compose.runtime.Composable
 import star.kiko13bb.emerald.R
 
